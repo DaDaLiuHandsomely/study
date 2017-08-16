@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			html,body{
+				height: 100%;
+			}
+			canvas{
+				background: #C4E3F3;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="" width="1800" height="900"></canvas>
+	</body>
+</html>
+<script src="../js/digit.js"></script>
+<script>
+	var can = document.querySelector('canvas');
+	var pen = can.getContext('2d');
+	var co = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+	var ball = [];
+	var statue;
+	var arr;
+	setInterval(function(){
+		var n1 = Math.round(Math.random()*15);
+		var n2 = Math.round(Math.random()*15);
+		var n3 = Math.round(Math.random()*15);
+		var n4 = Math.round(Math.random()*15);
+		var n5 = Math.round(Math.random()*15);
+		var n6 = Math.round(Math.random()*15);
+		ball.push({
+			x:900,
+			y:50,
+			v:0,
+			g:4,
+			xv:Math.pow(-1,Math.round(Math.random()))*4,
+			c:'#'+co[n1]+co[n2]+co[n3]+co[4]+co[5]+co[6]
+		});
+	},1000);
+	
+	setInterval(function(){
+		pen.clearRect(0,0,1800,900)
+		var timeArray = getDate();
+		if(timeArray!==getDate()){
+			statue = 1;
+		}
+		timeArray.splice(2,0,'10');
+		timeArray.splice(5,0,'10');
+		for(var t = 0;t<timeArray.length;t++){
+			arr = digit[timeArray[t]];
+			for(var i = 0;i<arr.length;i++){
+				for(var j = 0;j<arr[i].length;j++){
+					var n1 = Math.round(Math.random()*15);
+					var n2 = Math.round(Math.random()*15);
+					var n3 = Math.round(Math.random()*15);
+					var n4 = Math.round(Math.random()*15);
+					var n5 = Math.round(Math.random()*15);
+					var n6 = Math.round(Math.random()*15);
+					if(arr[i][j]==1){				
+						pen.beginPath();
+						pen.fillStyle = '#'+co[n1]+co[n2]+co[n3]+co[4]+co[5]+co[6];
+						pen.arc(j*20+200+t*150,i*20+100,8,0,Math.PI*2);
+						pen.fill();
+						pen.closePath();
+					}
+				}
+			}
+		}
+		
+	},1000);
+	function getDate(){
+		var date = new Date();
+		var h = date.getHours().toString();
+		var m = date.getMinutes().toString();
+		var s = date.getSeconds().toString();
+		h.length<2 ? (h = '0'+h):h;
+		m.length<2 ? (m = '0'+m):m;
+		s.length<2 ? (s = '0'+s):s;
+		var time = h+':'+m+':'+s;
+		return (h+m+s).split('');
+	}
+	
+		
+
+	
+</script>

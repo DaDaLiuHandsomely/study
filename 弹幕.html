@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				background:#0086B3;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="" width="1500" height="800"></canvas>
+		<input type="text" />
+		<button>发送</button>
+	</body>
+</html>
+<script>
+	var can = document.querySelector('canvas');
+	var pen = can.getContext('2d');
+	var f = [];
+	var inp = document.querySelector('input');
+	var btn = document.querySelector('button');
+	btn.onclick = function(){
+		f.push({
+			x:1500,
+			y:Math.round(Math.random()*600),
+			c:'#'+Math.round(Math.random()*9)+Math.round(Math.random()*9)+Math.round(Math.random()*9)+Math.round(Math.random()*9)+Math.round(Math.random()*9)+Math.round(Math.random()*9),
+			p:inp.value,
+			s:4
+		})
+	}
+	setInterval(function(){
+		pen.clearRect(0,0,1500,800)
+		for(var i = 0;i<f.length;i++){
+			
+			pen.beginPath();
+			pen.font = '50px 楷体';
+			pen.fillStyle = f[i].c;
+			pen.fillText(f[i].p,f[i].x-=f[i].s,f[i].y);
+			pen.fill();
+			pen.closePath();
+			if(f[i].x<=-500){
+				f.splice(i,1);
+			}
+		}
+		
+	},1000/24);
+	
+</script>

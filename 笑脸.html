@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<canvas id="" width="1500" height="800"></canvas>
+	</body>
+</html>
+<script>
+	var can = document.querySelector('canvas');
+	var pen = can.getContext('2d');
+	pen.beginPath();
+	pen.fillStyle = 'yellow';
+	pen.arc(500,500,300,0,Math.PI*2);
+	pen.fill();
+	pen.closePath();
+	pen.beginPath();
+	pen.fillStyle = '#fff';
+	pen.arc(360,420,50,0,Math.PI*2);
+	pen.fill();
+	pen.closePath();
+	pen.beginPath();
+	pen.fillStyle = '#fff';
+	pen.arc(640,420,50,0,Math.PI*2);
+	pen.fill();
+	pen.closePath();
+	pen.beginPath();
+	pen.fillStyle = '#fff';
+	pen.arc(500,550,150,0,Math.PI);
+	pen.fill();
+	pen.closePath();
+	
+</script>

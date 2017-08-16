@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			html,body{
+				height: 100%;
+			}
+			canvas{
+				background: #C4E3F3;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="" width="1800" height="900"></canvas>
+	</body>
+</html>
+<script src="../js/digit.js"></script>
+<script>
+	var can = document.querySelector('canvas');
+	var pen = can.getContext('2d');
+	var co = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+	var ball = [];
+	setInterval(function(){
+		var n1 = Math.round(Math.random()*15);
+		var n2 = Math.round(Math.random()*15);
+		var n3 = Math.round(Math.random()*15);
+		var n4 = Math.round(Math.random()*15);
+		var n5 = Math.round(Math.random()*15);
+		var n6 = Math.round(Math.random()*15);
+		ball.push({
+			x:900,
+			y:50,
+			v:0,
+			g:4,
+			xv:Math.pow(-1,Math.round(Math.random()))*4,
+			c:'#'+co[n1]+co[n2]+co[n3]+co[4]+co[5]+co[6]
+		});
+	},1000/15);
+	setInterval(function(){
+		pen.clearRect(0,0,1800,900);
+		for(var i = 0;i<ball.length;i++){
+			ball[i].v+=ball[i].g;
+			ball[i].y+=ball[i].v;
+			ball[i].x+=ball[i].xv;
+			if(ball[i].y>=850){
+				ball[i].y = 850;
+				ball[i].v = -ball[i].v*0.9;
+			}
+			
+			pen.beginPath();
+			pen.fillStyle = ball[i].c;
+			pen.arc(ball[i].x,ball[i].y,20,0,Math.PI*2);
+			pen.fill();
+			pen.closePath();
+			if(ball[i].x>=1800 || ball[i].x<=-50){
+				ball.splice(i,1);
+			}
+		}
+		
+	},1000/24)
+	
+</script>
